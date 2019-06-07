@@ -13,8 +13,7 @@ class HeatMap extends Component {
     super(props);
   }
 
-  async componentDidMount() {
-    // const element =
+  componentDidMount() {
     const config = {
       container: document.getElementById('heatMapIamge'),
       radius: 13,
@@ -22,15 +21,24 @@ class HeatMap extends Component {
       minOpacity: 0.2,
       blur: 0.75,
     };
-    // create heatmap with configuration
-    const heatmapInstance = h337.create(config);
+    this.heatmapInstance = h337.create(config);
+    this.generateData(this.props.dateRange);
+  }
 
-    const rawData = await locationData();
+  componentWillReceiveProps(next) {
+    this.generateData(next.dateRange);
+  }
+
+  async generateData(dateRange) {
+    // create heatmap with configuration
+
+
+    const rawData = await locationData(dateRange);
     const dataSet = rawData.map(element => mapGeoToHeatPoint(element.lat, element.long, { width: 782.8, height: 600 }, imageOne));
 
     // const dataPoint = mapGeoToHeatPoint(43.677331, -79.409862, { width: 782.8, height: 600 }, imageOne);
     console.log(dataSet);
-    heatmapInstance.setData({
+    this.heatmapInstance.setData({
       min: 0,
       max: 100,
       data: dataSet,
@@ -38,9 +46,9 @@ class HeatMap extends Component {
   }
 
   render() {
+    // this.generateData();
     return (
       <div className={styles.mainContainer}>
-        <h1>Chat Bot Use Locations:</h1>
         <div id="heatMapIamge">
           <img src={map} className={styles.imageContainer} alt="map" />
         </div>
