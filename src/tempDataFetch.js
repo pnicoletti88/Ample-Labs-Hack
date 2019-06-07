@@ -8,7 +8,7 @@
 // Firebase App (the core Firebase SDK) is always required and
 // must be listed before other Firebase SDKs
 // import * as firebase from "firebase/app";
-var firebase = require('firebase/app');
+const firebase = require('firebase/app');
 require('firebase/auth');
 require('firebase/database');
 // Add the Firebase services that you want to use
@@ -18,49 +18,49 @@ require('firebase/database');
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC9xICK5N6g5YQP2P8zV1BqOBv7MpvpUbk",
-  authDomain: "chalmers-hackday.firebaseapp.com",
-  databaseURL: "https://chalmers-hackday.firebaseio.com",
-  projectId: "chalmers-hackday",
-  storageBucket: "chalmers-hackday.appspot.com",
-  messagingSenderId: "30284571686",
-  appId: "1:30284571686:web:eaa7f4c20ef77cfa"
+  apiKey: 'AIzaSyC9xICK5N6g5YQP2P8zV1BqOBv7MpvpUbk',
+  authDomain: 'chalmers-hackday.firebaseapp.com',
+  databaseURL: 'https://chalmers-hackday.firebaseio.com',
+  projectId: 'chalmers-hackday',
+  storageBucket: 'chalmers-hackday.appspot.com',
+  messagingSenderId: '30284571686',
+  appId: '1:30284571686:web:eaa7f4c20ef77cfa',
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 
-let milliToDays = function(milli) {
+const milliToDays = function (milli) {
   return milli / 86400000;
-}
+};
 
 async function locationData(daysBack) {
-  return await firebase.database().ref('locations').once('value').then(function(snapshot) {
+  return firebase.database().ref('locations').once('value').then((snapshot) => {
     // console.log(snapshot.toJSON());
     const dataObj = snapshot.toJSON();
-    let dataArr = [];
-    for (let key in dataObj) {
+    const dataArr = [];
+    for (const key in dataObj) {
       dataArr.push(dataObj[key]);
     }
     dataArr.sort((a, b) => {
-      if (a["timestamp"] < b["timestamp"]) {
+      if (a.timestamp < b.timestamp) {
         return -1;
       }
-      if (a["timestamp"] > b["timestamp"]) {
+      if (a.timestamp > b.timestamp) {
         return 1;
       }
       return 0;
     });
-    let now = (new Date).getTime();
+    const now = (new Date()).getTime();
     return dataArr.filter((elem, _) => {
-      let then = elem.timestamp;
-      let timeDiff = Math.abs(now - then);
+      const then = elem.timestamp;
+      const timeDiff = now - then;
+      console.log(timeDiff);
       console.log(`timediff: ${milliToDays(timeDiff)}`);
-      return (milliToDays(timeDiff) < daysBack);
+      return (parseInt(milliToDays(timeDiff)) <= parseInt(daysBack));
     });
-    }
-  );
+  });
 }
 
 
