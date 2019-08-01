@@ -1,60 +1,89 @@
-/* eslint-disable no-undef */
+/* global google */
 import React, { Component } from 'react';
-import h337 from 'heatmapjs';
-import styles from './HeatMap.module.css';
+import GoogleMapReact from 'google-map-react';
+import PropTypes from 'prop-types';
+import { googleMaps } from '../../constants';
 
-import { locationData } from '../../tempDataFetch.js';
-import map from '../../Assets/ImageOne.png';
-import { mapGeoToHeatPoint } from './heatMapUtil';
-import { imageOne } from '../../constants';
 
 class HeatMap extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    const config = {
-      container: document.getElementById('heatMapIamge'),
-      radius: 13,
-      maxOpacity: 0.9,
-      minOpacity: 0.2,
-      blur: 0.75,
+    this.state = {
+      heatmapPoints: [
+        { lat: 59.95, lng: 30.33 },
+        { lat: 59.96, lng: 30.32 },
+      ],
     };
-    this.heatmapInstance = h337.create(config);
-    this.generateData(this.props.dateRange);
   }
 
-  componentWillReceiveProps(next) {
-    this.generateData(next.dateRange);
-  }
-
-  async generateData(dateRange) {
-    // create heatmap with configuration
-
-
-    const rawData = await locationData(dateRange);
-    const dataSet = rawData.map(element => mapGeoToHeatPoint(element.lat, element.long, { width: 782.8, height: 600 }, imageOne));
-
-    // const dataPoint = mapGeoToHeatPoint(43.677331, -79.409862, { width: 782.8, height: 600 }, imageOne);
-    console.log(dataSet);
-    this.heatmapInstance.setData({
-      min: 0,
-      max: 100,
-      data: dataSet,
-    });
-  }
 
   render() {
-    // this.generateData();
+    const {
+      center,
+      zoom,
+    } = this.props;
+    const { heatmapPoints } = this.state;
+    const heatMapData = {
+      positions: heatmapPoints,
+      options: {
+        radius: 10,
+        opacity: 0.5,
+      },
+    };
+
     return (
-      <div className={styles.mainContainer}>
-        <div id="heatMapIamge">
-          <img src={map} className={styles.imageContainer} alt="map" />
-        </div>
+      <div style={{ width: '500px', height: '500px' }}>
+        <GoogleMapReact
+          ref={(el) => { this._googleMap = el; }}
+          bootstrapURLKeys={googleMaps}
+          defaultCenter={center}
+          defaultZoom={zoom}
+          heatmapLibrary
+          heatmap={heatMapData}
+        />
       </div>
     );
   }
 }
 
+HeatMap.propTypes = {
+  center: PropTypes.shape({
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+  }),
+  zoom: PropTypes.number,
+};
+
+HeatMap.defaultProps = {
+  center: {
+    lat: 43.6532,
+    lng: -79.3832,
+  },
+  zoom: 12,
+};
+
 export default HeatMap;
+
+/*
+
+options:
+
+function defaultOptions_() {
+    return {
+        overviewMapControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        mapTypeControl: false,
+        // disable poi
+        styles: [
+          {
+            featureType: 'poi',
+            elementType: 'labels',
+            stylers: [{ visibility: 'off' }],
+          },
+        ],
+        minZoom: DEFAULT_MIN_ZOOM, // dynamically recalculted if possible during init
+      };
+    }
+
+*/
