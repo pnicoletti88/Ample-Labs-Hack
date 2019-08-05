@@ -1,9 +1,18 @@
-const express = require('express');
-const path = require('path');
-
+require("dotenv").config();
+require("./mongooseClient");
+const express = require("express");
+const bodyParser = require("body-parser");
+const http = require("http");
 
 const app = express();
+app.use(bodyParser());
+app.use(express.json());
 
-app.get('/', async (req, res) => res.status(200).send('sucess'));
+const locationDataRouter = require("./Routes/locationData");
 
-app.listen(8080, () => console.log('Server started. Press Ctrl+C to quit'));
+app.use("/locationData", locationDataRouter);
+
+const server = http.createServer(app);
+server.listen(process.env.PORT, () => {
+  console.log(`listening on port: ${process.env.PORT}`);
+});
