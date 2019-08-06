@@ -15,7 +15,8 @@ router.post("/", cors(), async (req, res) => {
     assert(latitude, "latitude needs to be passed");
     assert(action, "action needs to be passed");
   } catch (e) {
-    return res.status(400).send(e.message);
+    res.status(400).send(e.message);
+    return;
   }
 
   try {
@@ -40,6 +41,7 @@ router.get("/", async (req, res) => {
     assert(action, "action needs to be defined");
   } catch (e) {
     res.status(400).send(e.message);
+    return;
   }
 
   try {
