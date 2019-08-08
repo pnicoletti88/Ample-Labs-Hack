@@ -1,4 +1,3 @@
-.main{
-    width: "500px";
-    height: "500px"
+.main {
+    flex: 1;
 }

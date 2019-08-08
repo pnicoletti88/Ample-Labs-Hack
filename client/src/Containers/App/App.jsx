@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./App.module.css";
-import HeatMap from "./Components/HeatMap/HeatMap";
-import HeatMapSettings from "./Components/HeatMapSettings/HeatMapSettings";
+import HeatMap from "../../Components/HeatMap/HeatMap";
 
 class App extends Component {
   constructor() {
@@ -18,10 +17,10 @@ class App extends Component {
   };
 
   render() {
-    const { dateRange } = this.state;
+    // const {dateRange} = this.state;
     return (
       <div className={styles.main}>
-
+        <HeatMap />
       </div>
     );
   }
