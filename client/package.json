@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^6.1.1",
     "google-map-react": "^1.1.4",
     "heatmapjs": "^2.0.2",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
+    "rc-calendar": "^9.15.5",
+    "rc-time-picker": "^3.7.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
