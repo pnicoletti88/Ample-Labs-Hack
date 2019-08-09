@@ -1,6 +1,5 @@
 import "rc-calendar/assets/index.css";
 import React from "react";
-import ReactDOM from "react-dom";
 import Calendar from "rc-calendar";
 import DatePicker from "rc-calendar/lib/Picker";
 
