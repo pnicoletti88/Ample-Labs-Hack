@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import styles from "./HeatMapPage.module.css";
 import HeatMap from "../../Components/Features/HeatMap/HeatMap";
@@ -6,7 +6,7 @@ import SideBar from "../../Components/Features/SideBar/SideBar";
 import { getLocationData } from "../../Api/dataFetch";
 import { initialDateRange, initialAction } from "../../constants";
 
-class HeatMapPage extends Component {
+class HeatMapPage extends PureComponent {
   state = {
     startDate: initialDateRange.startDate,
     endDate: initialDateRange.endDate,

@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 import styles from "./Loader.module.css";
 
 class Loader extends Component {
-  state = {
-    loading: true
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    };
+  }
 
   onLoad = () => {
     const { loading } = this.state;
@@ -15,21 +18,19 @@ class Loader extends Component {
   };
 
   render() {
-    const { Element, ...rest } = this.props;
+    const { render } = this.props;
     const { loading } = this.state;
     return (
       <React.Fragment>
         {loading && <div className={styles.main}>Page Loading!</div>}
-        <div>
-          <Element onLoad={this.onLoad} {...rest} />
-        </div>
+        {render({ onLoad: this.onLoad })}
       </React.Fragment>
     );
   }
 }
 
 Loader.propTypes = {
-  Element: PropTypes.element.isRequired
+  render: PropTypes.func.isRequired
 };
 
 export default Loader;

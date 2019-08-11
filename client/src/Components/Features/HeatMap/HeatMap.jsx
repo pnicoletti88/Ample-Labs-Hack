@@ -32,10 +32,7 @@ class HeatMap extends PureComponent {
           heatmapLibrary
           heatmap={heatMapData}
           options={mapOptions}
-          onTilesLoaded={() => {
-            console.log("loaded");
-            onLoad();
-          }}
+          onTilesLoaded={onLoad}
         />
       </div>
     );
@@ -51,10 +48,10 @@ HeatMap.propTypes = {
   onLoad: PropTypes.func,
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      location: {
+      location: PropTypes.shape({
         long: PropTypes.number.isRequired,
         lat: PropTypes.number.isRequired
-      }
+      })
     })
   )
 };
