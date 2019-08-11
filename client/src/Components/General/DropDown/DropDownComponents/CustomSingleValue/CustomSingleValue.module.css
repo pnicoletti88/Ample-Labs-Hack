@@ -1,0 +1,17 @@
+.icon{
+    width: 20px;
+    align-self: flex-end;
+}
+
+.singleValue{
+    display: flex;
+    color: #5E5DFF;
+}
+
+.singleValueIcon{
+    padding: 0 10px 0 4px;
+}
+
+.singleValueText{
+    margin-left: 10px;
+}

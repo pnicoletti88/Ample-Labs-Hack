@@ -1,15 +1,15 @@
 const assert = require("assert");
 const LocationData = require("../Models/LocationData");
 
-const writeLocationData = async (action, long, lat, sessionId) => {
+const writeLocationData = async (action, long, lat) => {
+  // TODO: reduce time accuracy (nearest hour should do)
   try {
     const data = new LocationData({
       action,
       location: {
         long,
         lat
-      },
-      sessionId
+      }
     });
     const savedDoc = await data.save();
     return savedDoc;

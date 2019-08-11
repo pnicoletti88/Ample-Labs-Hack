@@ -1,77 +1,24 @@
 import React from "react";
-import Select, { components } from "react-select";
-import Loader from "../../../Assets/loader.svg";
+import Select from "react-select";
+import PropTypes from "prop-types";
+import { dropDownData } from "../../../constants";
 import styles from "./DropDown.module.css";
-
-const statusOptions = [
-  {
-    value: "todo",
-    label: "BOOM!",
-    imageSrc: Loader
-  },
-  { value: "in_progress", label: "W toku", imageSrc: Loader },
-  { value: "done", label: "Zalatwione", imageSrc: Loader },
-  { value: "rejected", label: "Odrzucone", imageSrc: Loader }
-];
-
-const customSingleValue = ({ data }) => (
-  <div className="input-select">
-    <div className="input-select__single-value">
-      <span className="input-select__icon" className={styles.singleValueIcon}>
-        <img src={data.imageSrc} className={styles.icon} alt="icon" />
-      </span>
-      <span>{data.label}</span>
-    </div>
-  </div>
-);
-
-const customOptions = props => (
-  <div className="input-select">
-    <div className="input-select__single-value">
-      <span className="input-select__icon">
-        <components.Option {...props}>
-          <div className="input-select">
-            <div className="input-select__single-value">
-              <span
-                className="input-select__icon"
-                className={styles.optionIcon}
-              >
-                <img
-                  src={props.data.imageSrc}
-                  className={styles.icon}
-                  alt="icon"
-                />
-              </span>
-              <span>{props.data.label}</span>
-            </div>
-          </div>
-        </components.Option>
-      </span>
-    </div>
-  </div>
-);
-
-const IndicatorSeparator = () => null;
-
-const IndicatorsContainer = props => {
-  return (
-    <div className={styles.indicator}>
-      <components.IndicatorsContainer {...props} />
-    </div>
-  );
-};
+import IndicatorSeparator from "./DropDownComponents/IndicatorsSeparator/IndicatorsSeparator";
+import IndicatorsContainer from "./DropDownComponents/IndicatorsContainer/IndicatorsContainer";
+import CustomSingleValue from "./DropDownComponents/CustomSingleValue/CustomSingleValue";
+import CustomOptions from "./DropDownComponents/CustomOptions/CustomOptions";
 
 const dropDownStyles = {
-  menu: (provided, state) => ({
+  menu: provided => ({
     ...provided,
-    border: "1px solid purple"
+    border: "1px solid #5E5DFF"
   }),
   control: provided => ({
     ...provided,
-    border: "1px solid purple",
+    border: "1px solid #5E5DFF",
     boxShadow: "none",
     "&:hover": {
-      border: "1px solid purple"
+      border: "1px solid #5E5DFF"
     }
   }),
   option: (provided, state) => ({
@@ -82,21 +29,30 @@ const dropDownStyles = {
   })
 };
 
-const DropDown = () => (
-  <div className={styles.main}>
-    <Select
-      defaultValue={statusOptions[0]}
-      options={statusOptions}
-      components={{
-        SingleValue: customSingleValue,
-        Option: customOptions,
-        IndicatorsContainer,
-        IndicatorSeparator
-      }}
-      isSearchable={false}
-      styles={dropDownStyles}
-    />
-  </div>
-);
+const DropDown = props => {
+  const { value, updateValue } = props;
+  return (
+    <div className={styles.main}>
+      <Select
+        defaultValue={dropDownData.find(item => item.value === value)}
+        options={dropDownData}
+        components={{
+          SingleValue: CustomSingleValue,
+          Option: CustomOptions,
+          IndicatorsContainer,
+          IndicatorSeparator
+        }}
+        isSearchable={false}
+        styles={dropDownStyles}
+        onChange={updateValue}
+      />
+    </div>
+  );
+};
+
+DropDown.propTypes = {
+  value: PropTypes.string.isRequired,
+  updateValue: PropTypes.func.isRequired
+};
 
 export default DropDown;

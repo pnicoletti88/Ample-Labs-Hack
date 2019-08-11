@@ -3,14 +3,14 @@ require("./mongooseClient");
 const express = require("express");
 const bodyParser = require("body-parser");
 const http = require("http");
+const indexRouter = require("./Routes/index");
 
 const app = express();
-app.use(bodyParser());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-const locationDataRouter = require("./Routes/locationData");
-
-app.use("/locationData", locationDataRouter);
+app.use("/api", indexRouter);
 
 const server = http.createServer(app);
 server.listen(process.env.PORT, () => {

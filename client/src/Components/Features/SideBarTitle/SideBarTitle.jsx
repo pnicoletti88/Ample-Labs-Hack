@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./SideBarSubHeading.module.css";
+import styles from "./SideBarTitle.module.css";
 
-const SideBarSubHeading = props => {
+const SideBarTitle = props => {
   const { title } = props;
   return (
     <div className={styles.main}>
-      <h2 className={styles.text}>{title}</h2>
+      <h1 className={styles.text}>{title}</h1>
     </div>
   );
 };
 
-SideBarSubHeading.propTypes = {
+SideBarTitle.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-export default SideBarSubHeading;
+export default SideBarTitle;
