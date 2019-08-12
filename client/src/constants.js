@@ -1,3 +1,4 @@
+import moment from "moment";
 import clothing from "./Assets/clothing.svg";
 import dropIn from "./Assets/dropIn.svg";
 import emergency from "./Assets/emergency.svg";
@@ -19,7 +20,10 @@ const actionTypes = {
 const pastDate = new Date();
 pastDate.setDate(pastDate.getDate() - 30);
 
-const initialDateRange = { startDate: pastDate, endDate: new Date() };
+const initialDateRange = {
+  startDate: moment().subtract(30, "days"),
+  endDate: moment()
+};
 const initialAction = actionTypes.LOGIN;
 
 const dropDownData = [

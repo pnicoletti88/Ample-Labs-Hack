@@ -40,16 +40,24 @@ class HeatMapPage extends PureComponent {
     this.setState({ endDate });
   };
 
+  updateDataWithState = () => {
+    const { action, startDate, endDate } = this.state;
+    this.updateLocationData(action, startDate, endDate);
+  };
+
   render() {
     const { onLoad } = this.props;
-    const { heatMapPoints, action } = this.state;
+    const { heatMapPoints, action, startDate, endDate } = this.state;
     return (
       <div className={styles.main}>
         <SideBar
           updateAction={this.updateAction}
-          updateStartDate={this.updateStartDate}
-          updateEndDate={this.updateEndDate}
+          onStartDateChange={this.updateStartDate}
+          onEndDateChange={this.updateEndDate}
           action={action}
+          startDate={startDate}
+          endDate={endDate}
+          updateData={this.updateDataWithState}
         />
         <HeatMap data={heatMapPoints} onLoad={onLoad} />
       </div>

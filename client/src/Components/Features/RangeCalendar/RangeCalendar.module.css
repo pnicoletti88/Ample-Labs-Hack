@@ -1,0 +1,15 @@
+.main{
+  display: flex;
+}
+
+.input{
+  color: #7984D0;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 20px;
+  width: 150px;
+  background-color: none;
+  border: none;
+  border-bottom: 0.6px solid rgba(141,156,255,0.99);;
+  text-align: center;
+}

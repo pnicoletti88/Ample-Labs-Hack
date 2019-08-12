@@ -1,8 +1,8 @@
 import React from "react";
 import Loader from "../Loader/Loader";
 
-const HeatMapPage = React.lazy(() => import("../HeatMapPage/HeatMapPage"));
-
+// const HeatMapPage = React.lazy(() => import("../HeatMapPage/HeatMapPage"));
+import HeatMapPage from "../HeatMapPage/HeatMapPage";
 // allows PreComponent to still work (do not want to re-render heatmap)
 // placing dynmaically it will regenerate object everytime
 const renderHeatMapPage = props => {

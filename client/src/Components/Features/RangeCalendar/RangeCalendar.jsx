@@ -2,6 +2,8 @@ import "rc-calendar/assets/index.css";
 import React from "react";
 import Calendar from "rc-calendar";
 import DatePicker from "rc-calendar/lib/Picker";
+import PropTypes from "prop-types";
+import momentPropTypes from "react-moment-proptypes";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
@@ -10,7 +12,9 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/en-gb";
 
-const format = "YYYY-MM-DD";
+import styles from "./RangeCalendar.module.css";
+
+const format = "LL";
 const cn = window.location.search.indexOf("cn") !== -1;
 
 const now = moment();
@@ -23,45 +27,30 @@ if (cn) {
 const defaultCalendarValue = now.clone();
 defaultCalendarValue.add(-1, "month");
 
-class Demo extends React.Component {
-  state = {
-    open: false,
-    destroy: false
-  };
-
+class RangeCalendar extends React.Component {
   getCalendarContainer() {
     return this.d || document.getElementById("d");
   }
 
-  setVisible(open) {
-    this.setState({
-      open
-    });
-  }
-
-  open = () => {
-    this.setVisible(true);
-  };
-
-  close = () => {
-    this.setVisible(false);
-  };
-
   render() {
+    const { onChange, dateValue } = this.props;
     return (
-      <div>
-        &nbsp;
-        <div id="d" style={{ width: "200px" }} ref={n => (this.d = n)} />
-        <div style={{ marginTop: 20 }}>
+      <div className={styles.main}>
+        <div id="d" ref={n => (this.d = n)} />
+        <div>
           <DatePicker
             getCalendarContainer={this.getCalendarContainer}
-            calendar={<Calendar locale={cn ? zhCN : enUS} />}
+            calendar={
+              <Calendar locale={cn ? zhCN : enUS} style={{ width: 200 }} />
+            }
+            value={dateValue}
+            onChange={onChange}
           >
             {({ value }) => {
               return (
                 <span>
                   <input
-                    style={{ width: 250 }}
+                    className={styles.input}
                     readOnly
                     value={(value && value.format(format)) || ""}
                   />
@@ -75,4 +64,9 @@ class Demo extends React.Component {
   }
 }
 
-export default Demo;
+RangeCalendar.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  dateValue: momentPropTypes.momentObj.isRequired
+};
+
+export default RangeCalendar;
