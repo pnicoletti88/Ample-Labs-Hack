@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a618cebe.chunk.css",
+    "main.js": "/static/js/main.994ff0bc.chunk.js",
+    "main.js.map": "/static/js/main.994ff0bc.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.4118c0c4.chunk.css": "/static/css/2.4118c0c4.chunk.css",
+    "static/js/2.2155ab5d.chunk.js": "/static/js/2.2155ab5d.chunk.js",
+    "static/js/2.2155ab5d.chunk.js.map": "/static/js/2.2155ab5d.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.6860a73e87b1981e3ba7a9a4eabc298c.js": "/precache-manifest.6860a73e87b1981e3ba7a9a4eabc298c.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.4118c0c4.chunk.css.map": "/static/css/2.4118c0c4.chunk.css.map",
+    "static/css/main.a618cebe.chunk.css.map": "/static/css/main.a618cebe.chunk.css.map",
+    "static/media/clothing.svg": "/static/media/clothing.ee713939.svg",
+    "static/media/dropIn.svg": "/static/media/dropIn.ced1ebf0.svg",
+    "static/media/emergency.svg": "/static/media/emergency.c0adc641.svg",
+    "static/media/freeMeal.svg": "/static/media/freeMeal.9bb213d2.svg",
+    "static/media/shelter.svg": "/static/media/shelter.af0d3930.svg"
+  }
+}
